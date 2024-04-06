@@ -1,6 +1,7 @@
 package dev.lpa;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -111,18 +112,24 @@ public class Main {
         // [6]
             // Select five students from #5 and print their info
 
-        myStudents.stream()
+        var longTimeLearners = myStudents.stream()
                 .filter((student -> student.getYearsSinceEnrolled() >=7 && student.getMonthsSinceActive() ==0))
                 .limit(5)
-                .forEach(System.out::println);
+                // Makes a new Array of Students
+                .toArray(Student[]::new);
+
+
+        var learners = myStudents.stream()
+                .filter((student -> student.getYearsSinceEnrolled() >=7 && student.getMonthsSinceActive() ==0))
+                .limit(5)
+                // Makes a new Array of Students
+                .collect(Collectors.toList());
+
+        Collections.shuffle(learners);
 
 
 
 
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println("Starting #7 --------");
 
     }
 }
