@@ -2,6 +2,7 @@ package dev.lpa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -54,7 +55,34 @@ public class Main {
 
 
 
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Starting #3 --------");
 
+        // [3]
+
+         var sumStat = myStudents.stream()
+                 .mapToInt(student -> student.getAge())
+                 .summaryStatistics();
+
+         System.out.println("Age summary statistics: " + sumStat);
+
+
+
+         // [4]
+            // Print distinct list of country codes
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Starting #4 --------");
+
+
+        var distinctCountryCodes = myStudents.stream()
+                .map(student -> student.getCountryCode())
+                .collect(Collectors.toSet());
+
+        System.out.println("Distinct country codes = " + distinctCountryCodes);
 
     }
 }
