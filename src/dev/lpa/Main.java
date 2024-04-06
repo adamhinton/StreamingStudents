@@ -91,5 +91,23 @@ public class Main {
         System.out.println();
         System.out.println("Starting #5 --------");
 
+        // [5]
+        // Make list of *active* students who have been enrolled >7 yrs
+            // Use a match op for this
+
+        var activeStudents7Plus = myStudents
+                .stream()
+                .anyMatch(student -> student.getYearsSinceEnrolled() >=7 && student.getMonthsSinceActive() ==0);
+
+        System.out.println("activeStudents7Plus : " + activeStudents7Plus );
+
+
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Starting #5 --------");
+
+        // [6]
     }
 }
