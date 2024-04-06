@@ -109,5 +109,11 @@ public class Main {
         System.out.println("Starting #5 --------");
 
         // [6]
+            // Select five students from #5 and print their info
+
+        myStudents.stream()
+                .filter((student -> student.getYearsSinceEnrolled() >=7 && student.getMonthsSinceActive() ==0))
+                .limit(5)
+                .forEach(System.out::println);
     }
 }
