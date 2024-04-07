@@ -25,14 +25,20 @@ public class MainOptional {
         System.out.println(o1);
 
 
-//        System.out.println(o1.get());
-        o1.ifPresent(System.out::println);
+        // prints nothing because this optional is empty
+        // this is good
+        o1.ifPresentOrElse(System.out::println, () -> System.out.println("----> Emptye"));
 
         Optional<Student> o2 = getStudent(myStudents,"first");
         System.out.println("Empty = " + o2.isEmpty() + ", Present = " + o2.isPresent());
         System.out.println(o2);
 
         o2.ifPresent(System.out::println);
+
+        Student firstStudent = (o2.orElse(null));
+        long id = (firstStudent== null) ? -1 : firstStudent.getStudentId();
+
+        System.out.println("firstStudent id : " + id);
 
     }
 
@@ -51,6 +57,12 @@ public class MainOptional {
         }
 
         return Optional.ofNullable(list.get(new Random().nextInt(list.size())));
+    }
+
+
+    private static Student getDummyStudent (Course ... courses){
+        System.out.println("Getting dummy student");
+        return new Student ("NO", 1, 1, "U", false, courses);
     }
 
 }
