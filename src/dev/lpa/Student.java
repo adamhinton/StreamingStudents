@@ -125,7 +125,7 @@ public class Student {
                 courses);
 
         for (Course c : courses) {
-            int lecture = random.nextInt(1, c.lectureCount());
+            int lecture = random.nextInt(Math.max(30, c.lectureCount()));  // Ensure a minimum lecture count of 30
             int year = random.nextInt(student.getYearEnrolled(), maxYear);
             int month = random.nextInt(1, 13);
             if (year == (maxYear - 1)) {
