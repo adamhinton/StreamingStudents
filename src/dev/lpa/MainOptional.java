@@ -41,6 +41,27 @@ public class MainOptional {
 
         System.out.println("firstStudent id : " + id);
 
+
+
+        System.out.println("------------------------");
+        System.out.println("------------------------");
+        System.out.println("------------------------");
+        System.out.println("------------------------");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+
+        List<String> countries= myStudents.stream()
+                .map(Student::getCountryCode).distinct()
+                .toList();
+
+        Optional.of(countries)
+                .map(l -> String.join(",", l))
+                .filter(l -> l.contains("FR"))
+                .ifPresentOrElse(System.out::println,
+                        () -> System.out.println("Missing FR"));
     }
 
     // `type` is type of retrieval, which is first, last or any
