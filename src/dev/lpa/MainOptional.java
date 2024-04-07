@@ -35,8 +35,9 @@ public class MainOptional {
 
         o2.ifPresent(System.out::println);
 
-        Student firstStudent = (o2.orElse(null));
-        long id = (firstStudent== null) ? -1 : firstStudent.getStudentId();
+//        Student firstStudent = (o2.orElse(getDummyStudent(jmc)));
+        Student firstStudent = o2.orElseGet(() -> getDummyStudent(jmc));
+        long id = firstStudent.getStudentId();
 
         System.out.println("firstStudent id : " + id);
 
