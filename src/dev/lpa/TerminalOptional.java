@@ -17,7 +17,7 @@ public class TerminalOptional {
                 // Doing it this way so we can modify this list
                 .collect(Collectors.toList());
 
-        int minAge = 21;
+        int minAge = 18;
 
         myStudents.stream()
                 .filter(student -> student.getAge() <= minAge)
@@ -58,8 +58,26 @@ public class TerminalOptional {
                 .filter(student -> student.getAge() <= minAge)
                 .mapToInt(Student::getAge)
                 .average()
-                .ifPresentOrElse(a -> System.out.printf("Avg age under 21: " + a));
+                .ifPresentOrElse(a -> System.out.printf("Avg age under 21: %.2f%n",a),
+                        () -> System.out.println("Didn't find anyone under " + minAge));
 
+        myStudents.stream()
+                .filter(student -> student.getAge() <= minAge)
+                .map(Student::getCountryCode)
+                .distinct()
+                .reduce((a, b) -> String.join(",", a, b))
+                .ifPresentOrElse(System.out::println,
+                        () -> System.out.println("None found"));
+
+
+        myStudents.stream()
+                .map(Student::getCountryCode)
+                .distinct()
+                .map(l -> String.join(",", l))
+                .filter(l -> l.contains("AU"))
+                .findAny()
+                .ifPresentOrElse(System.out::println,
+                        () -> System.out.println("Missing AU"));
 
     }
 
