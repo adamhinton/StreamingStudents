@@ -79,6 +79,8 @@ public class TerminalOptional {
                 .ifPresentOrElse(System.out::println,
                         () -> System.out.println("Missing AU"));
 
+
+
     }
 
 }
