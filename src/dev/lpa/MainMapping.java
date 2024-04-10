@@ -1,11 +1,9 @@
 package dev.lpa;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 public class MainMapping {
 
@@ -34,7 +32,46 @@ public class MainMapping {
         var youngerSet = myStudents.stream()
                 .collect(groupingBy(Student::getCountryCode,
                         filtering(s -> s.getAge() <= minAge, toList())));
-    }
 
+
+        youngerSet.forEach((k, v) -> System.out.println(k + " " + v.size()));
+
+
+
+        var experienced = myStudents.stream()
+                .collect(partitioningBy(Student::hasProgrammingExperience));
+        System.out.println("Experienced students = " + experienced.get(true).size());
+
+
+        var expCount = myStudents.stream()
+                .collect(partitioningBy(Student::hasProgrammingExperience, counting()));
+        System.out.println("Experienced students = " + expCount.get(true));
+
+
+
+        var experiencedAndActive = myStudents.stream()
+                .collect(partitioningBy(
+                        s -> s.hasProgrammingExperience()
+                        && s.getMonthsSinceActive() == 0,
+                        counting()));
+        System.out.println("Experienced students = " + experiencedAndActive.get(true));
+
+
+
+
+
+        var multiLevel = myStudents.stream()
+                .collect(groupingBy(Student::getCountryCode,
+                        groupingBy(Student::getGender)
+                        ));
+
+        multiLevel.forEach((key, value) ->{
+            System.out.println(key);
+            value.forEach((key1, value1) ->
+                    System.out.println("\t" + key1 + " " +  value1.size()));
+        });
+
+
+    }
 
 }
