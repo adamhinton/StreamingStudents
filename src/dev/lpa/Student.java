@@ -1,9 +1,7 @@
 package dev.lpa;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Student {
 
@@ -110,6 +108,14 @@ public class Student {
 
     private static String getRandomVal(String... data) {
         return data[random.nextInt(data.length)];
+    }
+
+    // randomize the courses each student gets
+    private static Course[] getRandomSelection (Course... courses){
+        int courseCount = random.nextInt(1, courses.length +1);
+        List<Course> courseList = new ArrayList<>(Arrays.asList(courses));
+
+
     }
 
     public static Student getRandomStudent(Course... courses) {
